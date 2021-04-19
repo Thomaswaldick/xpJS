@@ -41,12 +41,20 @@
           <img class="startMenuIcon" src="./22.ico" alt="Folder with page">
           <div class="startMenuText">Control Panel</div>
         </div>
-        <div class="startMenuItem">
-          <img class="startMenuIcon" src="./138.ico" alt="Folder with page">
-          <div class="startMenuText">Printers and Faxes</div>
-        </div>
         <div class="dividerContainer">
           <div class="divider"></div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./24.ico" alt="Folder with page">
+          <div class="startMenuText">Help and Support</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./23.ico" alt="Folder with page">
+          <div class="startMenuText">Search</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./25.ico" alt="Folder with page">
+          <div class="startMenuText">Run...</div>
         </div>
       </div>
     </div>
@@ -70,7 +78,38 @@
     const startButton = document.querySelector('.startButton');
     const startMenu = document.querySelector('.startMenu');
     const bottomBar = document.querySelector('.bottomBar');
+    const startMenuItems = document.querySelectorAll('.startMenuItem');
+    const body = document.querySelector('body');
     let startMenuOpen = false;
+    function mouseClicked(e) {
+      if (startMenuOpen) {
+        let isInStartMenu = classInElement(e.target, "startMenu");
+        if (!isInStartMenu) {
+          changeStartMenu();
+        }
+      } else {
+        let isStartButton = classInElement(e.target, "startContainer");
+        if (isStartButton) {
+          changeStartMenu();
+        }
+      }
+    }
+    function classInElement(el, className) {
+      let keepSearching = true;
+      let currentEl = el;
+      let result = false;
+      while(keepSearching) {
+        if (currentEl.className === className) {
+          result = true;
+        }
+        if (currentEl.parentElement === null || result) {
+          keepSearching = false;
+        } else {
+          currentEl = currentEl.parentElement;
+        }
+      }
+      return result;
+    }
     function setTime() {
       const now = new Date();
       let hour = now.getHours();
@@ -87,7 +126,7 @@
       }
       timeText.innerHTML = hour + ":" + minutes + " " + suffix;
     }
-    function startButtonClicked() {
+    function changeStartMenu() {
       startMenuOpen = !startMenuOpen;
       startMenuOpen ? startMenu.style.display = "flex" : startMenu.style.display = "none"
       startMenuOpen ? startMenu.style.bottom = (bottomBar.clientHeight + "px") : startMenu.style.bottom = "0 px"
@@ -95,7 +134,10 @@
     setInterval(setTime, 1000);
     setTime();
     startButton.addEventListener("mouseover", () => startButton.style.cursor = "pointer")
-    startButton.addEventListener("click", startButtonClicked)
+    body.addEventListener("click", mouseClicked)
+    startMenuItems.forEach(item => {
+      item.addEventListener("mouseover", () => item.style.cursor = "pointer")
+    });
   </script>
 </body>
 </html>

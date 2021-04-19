@@ -17,6 +17,7 @@ body {
   margin: 4px;
   height: 35px;
   width: 35px;
+  user-select: none;
 }
 .blueSpacer{
   background: linear-gradient(#2057D4,#235CDB,#295FD7);
@@ -60,7 +61,6 @@ body {
   width: 100%;
 }
 .startButton{
-  /* border: 1px solid pink; */
   background: radial-gradient( #82BE8E,#45A449 , #307732);
   border-top: 2px solid #82BE8E;
   padding-left: 8px;
@@ -119,7 +119,6 @@ body {
 }
 .startMenuText{
   color: #0A246A;
-  font-weight: 600;
   text-shadow: 0.1px 0.1px #3C548E;
   margin-left: 3px;
   letter-spacing: 0.1px;
@@ -128,8 +127,6 @@ body {
 }
 .startText{
   color: white;
-  /* font-weight: bolder; */
-  /* letter-spacing: 0.5px; */
   text-shadow: 1px 1px #447B34;
   font-size: 12px;
   font-weight: 600;
@@ -142,6 +139,7 @@ body {
   font-size: 8px;
   font-weight: 100;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
 }
 .topBar{
   background: linear-gradient(#1565CD, #4792EC);
@@ -159,4 +157,5 @@ body {
   font-weight: 600;
   margin-left: 2px;
   text-shadow: 1px 1px #336FB7;
+  user-select: none;
 }
