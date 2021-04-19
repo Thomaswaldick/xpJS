@@ -10,9 +10,44 @@
 <body>
   <div class="startMenu">
     <div class="topBar">
-      <img src="" alt="">
+      <img class="avatar" src="duck.jpg" alt="avatar image">
       <div class="usernameText">
-        User
+        Dirk Funk
+      </div>
+    </div>
+    <div class="startMenuContainer">
+      <div class="leftStartMenu"></div>
+      <div class="rightStartMenu">
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./235.ico" alt="Folder with page">
+          <div class="startMenuText">My Documents</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./236.ico" alt="Folder with page with a circl">
+          <div class="startMenuText">My Pictures</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./237.ico" alt="Folder with page">
+          <div class="startMenuText">My Music</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./16.ico" alt="Folder with page">
+          <div class="startMenuText">My Computer</div>
+        </div>
+        <div class="dividerContainer">
+          <div class="divider"></div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./22.ico" alt="Folder with page">
+          <div class="startMenuText">Control Panel</div>
+        </div>
+        <div class="startMenuItem">
+          <img class="startMenuIcon" src="./138.ico" alt="Folder with page">
+          <div class="startMenuText">Printers and Faxes</div>
+        </div>
+        <div class="dividerContainer">
+          <div class="divider"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -38,17 +73,24 @@
     let startMenuOpen = false;
     function setTime() {
       const now = new Date();
-      const hour = now.getHours();
+      let hour = now.getHours();
       let minutes = now.getMinutes();
       if (minutes < 10) {
         minutes = "0" + minutes.toString()
       }
       const suffix = hour>=12 ? "PM" : "AM";
-      timeText.innerHTML = hour%12 + ":" + minutes + " " + suffix;
+      if (hour === 0) {
+        hour = "12";
+      }
+      else if (hour < 10) {
+        hour = "0" + hour.toString()
+      }
+      timeText.innerHTML = hour + ":" + minutes + " " + suffix;
     }
     function startButtonClicked() {
       startMenuOpen = !startMenuOpen;
-      startMenuOpen ? startMenu.style.display = "block" : startMenu.style.display = "none"
+      startMenuOpen ? startMenu.style.display = "flex" : startMenu.style.display = "none"
+      startMenuOpen ? startMenu.style.bottom = (bottomBar.clientHeight + "px") : startMenu.style.bottom = "0 px"
     }
     setInterval(setTime, 1000);
     setTime();

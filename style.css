@@ -10,6 +10,14 @@ body {
   /* border: 1px solid pink; */
   height: 100vh;
 }
+.avatar{
+  border-radius: 2px;
+  border: 1px solid white;
+  box-shadow: 1px 1px #336FB7;
+  margin: 4px;
+  height: 35px;
+  width: 35px;
+}
 .blueSpacer{
   background: linear-gradient(#2057D4,#235CDB,#295FD7);
   border-top: 1.5px solid #4695E5;
@@ -24,6 +32,15 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.divider{
+  border-top: 1px solid #9DC4FA;
+  border-bottom: 1px solid #E5EAF0;
+  width: 80%;
+}
+.dividerContainer{
+  display: flex;
+  justify-content: center;
+}
 .endBox{
   background: linear-gradient(#1097E9, #108DE7, #1097E9);
   border-top: 1.5px solid #21ADF5;
@@ -32,6 +49,15 @@ body {
   align-items: center;
   padding-right: 10px;
   padding-left: 10px;
+}
+.leftStartMenu{
+  width: 100%;
+  height: 100%;
+}
+.rightStartMenu{
+  background: #D3E5FA;
+  height: 100%;
+  width: 100%;
 }
 .startButton{
   /* border: 1px solid pink; */
@@ -62,12 +88,43 @@ body {
   /* margin-top: 1px; */
 }
 .startMenu{
+  border-left: 1.5px solid #6086D4;
+  border-right: 2px solid #1C5AC5;
   position: absolute;
   bottom: 0px;
-  width: 250px;
-  height: 300px;
+  width: 325px;
+  height: 420px;
   display: none;
+  flex-direction: column;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   background: white;
+}
+.startMenuContainer{
+  border-top: 1px solid #FF891B;
+  border-bottom: 1px solid #226ED2;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.startMenuIcon{
+  height: 25px;
+  width: 25px;
+}
+.startMenuItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 7px;
+}
+.startMenuText{
+  color: #0A246A;
+  font-weight: 600;
+  text-shadow: 0.1px 0.1px #3C548E;
+  margin-left: 3px;
+  letter-spacing: 0.1px;
+  font-size: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .startText{
   color: white;
@@ -85,4 +142,21 @@ body {
   font-size: 8px;
   font-weight: 100;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.topBar{
+  background: linear-gradient(#1565CD, #4792EC);
+  border-bottom: 2px solid #3C88E5;
+  border-top: 2px solid #69A4E7;
+  border-left: 1px solid #69A4E7;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.usernameText{
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 2px;
+  text-shadow: 1px 1px #336FB7;
 }
