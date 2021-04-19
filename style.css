@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: url('xp_bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover;
+  /* border: 1px solid pink; */
+  height: 100vh;
+}
+.blueSpacer{
+  background: linear-gradient(#2057D4,#235CDB,#295FD7);
+  border-top: 1.5px solid #4695E5;
+  border-bottom: 1px solid #1E4CBF;
+  border-right: 1px solid #0C3D8C;
+  flex: 1;
+}
+.bottomBar{
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.endBox{
+  background: linear-gradient(#1097E9, #108DE7, #1097E9);
+  border-top: 1.5px solid #21ADF5;
+  border-left: 1px solid #29BFF1;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.startButton{
+  /* border: 1px solid pink; */
+  background: radial-gradient( #82BE8E,#45A449 , #307732);
+  border-top: 2px solid #82BE8E;
+  padding-left: 8px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: -2px;
+  margin-bottom: -1px;
+}
+.startContainer{
+  background: linear-gradient(#2057D4,#235CDB,#295FD7);
+  border-top: 2px solid #4695E5;
+  border-bottom: 1px solid #1E4CBF;
+}
+.startLogo{
+  height: 15px;
+  width: 15px;
+  margin-right: 3px;
+  user-select: none;
+  /* margin-top: 1px; */
+}
+.startMenu{
+  position: absolute;
+  bottom: 0px;
+  width: 250px;
+  height: 300px;
+  display: none;
+  background: white;
+}
+.startText{
+  color: white;
+  /* font-weight: bolder; */
+  /* letter-spacing: 0.5px; */
+  text-shadow: 1px 1px #447B34;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+.timeText{
+  color: white;
+  font-size: 8px;
+  font-weight: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

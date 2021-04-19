@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="startMenu">
+    <div class="topBar">
+      <img src="" alt="">
+      <div class="usernameText">
+        User
+      </div>
+    </div>
+  </div>
+  <div class="bottomBar">
+    <div class="startContainer">
+      <div>
+        <div class="startButton">
+          <img class="startLogo" src="xp_logo.png">
+          <div class="startText">start</div>
+        </div>
+      </div>
+    </div>
+    <div class="blueSpacer"></div>
+    <div class="endBox">
+      <div class="timeText"></div>
+    </div>
+  </div>
+  <script>
+    const timeText = document.querySelector('.timeText');
+    const startButton = document.querySelector('.startButton');
+    const startMenu = document.querySelector('.startMenu');
+    const bottomBar = document.querySelector('.bottomBar');
+    let startMenuOpen = false;
+    function setTime() {
+      const now = new Date();
+      const hour = now.getHours();
+      let minutes = now.getMinutes();
+      if (minutes < 10) {
+        minutes = "0" + minutes.toString()
+      }
+      const suffix = hour>=12 ? "PM" : "AM";
+      timeText.innerHTML = hour%12 + ":" + minutes + " " + suffix;
+    }
+    function startButtonClicked() {
+      startMenuOpen = !startMenuOpen;
+      startMenuOpen ? startMenu.style.display = "block" : startMenu.style.display = "none"
+    }
+    setInterval(setTime, 1000);
+    setTime();
+    startButton.addEventListener("mouseover", () => startButton.style.cursor = "pointer")
+    startButton.addEventListener("click", startButtonClicked)
+  </script>
+</body>
+</html>
