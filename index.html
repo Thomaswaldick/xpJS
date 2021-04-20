@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="desktop">
+    <div class="desktopIconContainer">
+      <img class="desktopIcon" src="./32.ico" alt="Recycle Bin">
+      <div class="desktopIconText">Recycle Bin</div>
+    </div>
+  </div>
   <div class="startMenu">
     <div class="topBar">
       <img class="avatar" src="duck.jpg" alt="avatar image">
@@ -15,6 +21,7 @@
         Dirk Funk
       </div>
     </div>
+    <div class="orangeDivider"></div>
     <div class="startMenuContainer">
       <div class="leftStartMenu"></div>
       <div class="rightStartMenu">
@@ -74,26 +81,33 @@
     </div>
   </div>
   <script>
+    // HTML Elements --------------------
     const timeText = document.querySelector('.timeText');
     const startButton = document.querySelector('.startButton');
     const startMenu = document.querySelector('.startMenu');
     const bottomBar = document.querySelector('.bottomBar');
     const startMenuItems = document.querySelectorAll('.startMenuItem');
     const body = document.querySelector('body');
+    // Variables --------------------
     let startMenuOpen = false;
-    function mouseClicked(e) {
-      if (startMenuOpen) {
-        let isInStartMenu = classInElement(e.target, "startMenu");
-        if (!isInStartMenu) {
-          changeStartMenu();
-        }
-      } else {
-        let isStartButton = classInElement(e.target, "startContainer");
-        if (isStartButton) {
-          changeStartMenu();
-        }
-      }
+    // Event Listeners --------------------
+    startButton.addEventListener("mouseover", updateStartButton())
+    body.addEventListener("click", mouseClicked)
+    startMenuItems.forEach(item => {
+      // item.addEventListener("mouseover", () => item.style.cursor = "pointer")
+      item.addEventListener("click", menuItemClicked)
+    });
+    document.addEventListener('keydown', keyPressed)
+    // Other Stuff --------------------
+    setInterval(setTime, 1000);
+    setTime();
+    // Functions --------------------
+    function changeStartMenu() {
+      startMenuOpen = !startMenuOpen;
+      startMenuOpen ? startMenu.style.display = "flex" : startMenu.style.display = "none"
+      startMenuOpen ? startMenu.style.bottom = (bottomBar.clientHeight + "px") : startMenu.style.bottom = "0 px"
     }
+    // --------------------
     function classInElement(el, className) {
       let keepSearching = true;
       let currentEl = el;
@@ -110,6 +124,32 @@
       }
       return result;
     }
+    // --------------------
+    function keyPressed(e) {
+      // console.log(e.code);
+      if (e.code == "OSLeft" || e.code == "OSRight") {
+        changeStartMenu();
+      }
+    }
+    // --------------------
+    function menuItemClicked(e) {
+      console.log("menu item clicked", e.target.innerText);
+    }
+    // --------------------
+    function mouseClicked(e) {
+      if (startMenuOpen) {
+        let isInStartMenu = classInElement(e.target, "startMenu");
+        if (!isInStartMenu) {
+          changeStartMenu();
+        }
+      } else {
+        let isStartButton = classInElement(e.target, "startContainer");
+        if (isStartButton) {
+          changeStartMenu();
+        }
+      }
+    }
+    // --------------------
     function setTime() {
       const now = new Date();
       let hour = now.getHours();
@@ -126,18 +166,10 @@
       }
       timeText.innerHTML = hour + ":" + minutes + " " + suffix;
     }
-    function changeStartMenu() {
-      startMenuOpen = !startMenuOpen;
-      startMenuOpen ? startMenu.style.display = "flex" : startMenu.style.display = "none"
-      startMenuOpen ? startMenu.style.bottom = (bottomBar.clientHeight + "px") : startMenu.style.bottom = "0 px"
+    // --------------------
+    function updateStartButton() {
+
     }
-    setInterval(setTime, 1000);
-    setTime();
-    startButton.addEventListener("mouseover", () => startButton.style.cursor = "pointer")
-    body.addEventListener("click", mouseClicked)
-    startMenuItems.forEach(item => {
-      item.addEventListener("mouseover", () => item.style.cursor = "pointer")
-    });
   </script>
 </body>
 </html>
