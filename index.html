@@ -11,35 +11,40 @@
   <div class="desktop">
     <div class="desktopIconContainer">
       <img class="desktopIcon" src="./32.ico" alt="Recycle Bin">
-      <div class="desktopIconText">Recycle Bin</div>
+      <div class="desktopIconTextContainer">
+        <div class="desktopIconText">Recycle Bin</div>
+      </div>
     </div>
   </div>
   <div class="startMenu">
     <div class="topBar">
-      <img class="avatar" src="duck.jpg" alt="avatar image">
+      <img class="avatar" src="snowflake.jpg" alt="avatar image">
       <div class="usernameText">
         Dirk Funk
       </div>
     </div>
-    <div class="orangeDivider"></div>
+    <div class="orangeDivider">
+      <div class="orangeLeft"></div>
+      <div class="orangeRight"></div>
+    </div>
     <div class="startMenuContainer">
       <div class="leftStartMenu"></div>
       <div class="rightStartMenu">
         <div class="startMenuItem">
           <img class="startMenuIcon" src="./235.ico" alt="Folder with page">
-          <div class="startMenuText">My Documents</div>
+          <div class="startMenuText bold">My Documents</div>
         </div>
         <div class="startMenuItem">
           <img class="startMenuIcon" src="./236.ico" alt="Folder with page with a circl">
-          <div class="startMenuText">My Pictures</div>
+          <div class="startMenuText bold">My Pictures</div>
         </div>
         <div class="startMenuItem">
           <img class="startMenuIcon" src="./237.ico" alt="Folder with page">
-          <div class="startMenuText">My Music</div>
+          <div class="startMenuText bold">My Music</div>
         </div>
         <div class="startMenuItem">
           <img class="startMenuIcon" src="./16.ico" alt="Folder with page">
-          <div class="startMenuText">My Computer</div>
+          <div class="startMenuText bold">My Computer</div>
         </div>
         <div class="dividerContainer">
           <div class="divider"></div>
@@ -87,25 +92,64 @@
     const startMenu = document.querySelector('.startMenu');
     const bottomBar = document.querySelector('.bottomBar');
     const startMenuItems = document.querySelectorAll('.startMenuItem');
+    const desktopIcons = document.querySelectorAll('.desktopIconContainer');
     const body = document.querySelector('body');
     // Variables --------------------
     let startMenuOpen = false;
+    let startButtonClicked = false;
+    let startButtonHover = false;
+    let dekstopIconSelected = null;
     // Event Listeners --------------------
-    startButton.addEventListener("mouseover", updateStartButton())
-    body.addEventListener("click", mouseClicked)
+    // body.addEventListener("click", mouseClicked)
+    body.addEventListener("mousedown", mouseDown)
+    document.addEventListener('keydown', keyPressed)
+    startButton.addEventListener('mouseenter', (e) => {
+      startButtonHover = true;
+      if (!startMenuOpen) {
+        startButton.classList.add("startButton-hover");
+      }
+    })
+    startButton.addEventListener('mouseleave', (e) => {
+      startButtonHover = false;
+      if (!startMenuOpen) {
+        startButton.classList.remove("startButton-hover");
+      }
+    })
     startMenuItems.forEach(item => {
-      // item.addEventListener("mouseover", () => item.style.cursor = "pointer")
+      item.addEventListener("mouseenter", () => {
+        item.classList.add("startMenuItem-hover");
+        const text = item.querySelector('.startMenuText');
+        text.classList.add("startMenuText-hover");
+      })
+      item.addEventListener("mouseleave", () => {
+        item.classList.remove("startMenuItem-hover");
+        const text = item.querySelector('.startMenuText');
+        text.classList.remove("startMenuText-hover");
+      })
       item.addEventListener("click", menuItemClicked)
     });
-    document.addEventListener('keydown', keyPressed)
+    desktopIcons.forEach(icon => {
+      icon.addEventListener('mousedown', (e) => {
+        dekstopIconSelected = icon;
+        const contain = icon.querySelector('.desktopIconTextContainer');
+        contain.classList.add('desktopIconTextContainer-selected');
+        const text = contain.querySelector('.desktopIconText');
+        text.classList.add('desktopIconText-selected');
+      });
+    });
     // Other Stuff --------------------
     setInterval(setTime, 1000);
     setTime();
     // Functions --------------------
     function changeStartMenu() {
       startMenuOpen = !startMenuOpen;
+      startButton.classList.remove("startButton-hover");
       startMenuOpen ? startMenu.style.display = "flex" : startMenu.style.display = "none"
       startMenuOpen ? startMenu.style.bottom = (bottomBar.clientHeight + "px") : startMenu.style.bottom = "0 px"
+      startMenuOpen ? 
+        startButton.classList.add("startButton-clicked") : 
+        startButton.classList.remove("startButton-clicked");
+      (!startMenuOpen && startButtonHover) ? startButton.classList.add("startButton-hover") : null;
     }
     // --------------------
     function classInElement(el, className) {
@@ -139,6 +183,23 @@
     function mouseClicked(e) {
       if (startMenuOpen) {
         let isInStartMenu = classInElement(e.target, "startMenu");
+        console.log('is start menu?', isInStartMenu);
+        if (!isInStartMenu) {
+          changeStartMenu();
+        }
+      } else {
+        let isStartButton = classInElement(e.target, "startContainer");
+        console.log('is start container?', isStartButton);
+        if (isStartButton) {
+          changeStartMenu();
+        }
+      }
+
+    }
+    // --------------------
+    function mouseDown(e) {
+      if (startMenuOpen) {
+        let isInStartMenu = classInElement(e.target, "startMenu");
         if (!isInStartMenu) {
           changeStartMenu();
         }
@@ -146,6 +207,17 @@
         let isStartButton = classInElement(e.target, "startContainer");
         if (isStartButton) {
           changeStartMenu();
+        }
+      }
+      
+      if (dekstopIconSelected) {
+        let isIcon = classInElement(e.target, "desktopIconContainer");
+        if (!isIcon) {
+          const contain = dekstopIconSelected.querySelector('.desktopIconTextContainer')
+          contain.classList.remove('desktopIconTextContainer-selected');
+          const text = contain.querySelector('.desktopIconText');
+          text.classList.remove('desktopIconText-selected');
+          dekstopIconSelected = null
         }
       }
     }
@@ -164,11 +236,7 @@
       else if (hour < 10) {
         hour = "0" + hour.toString()
       }
-      timeText.innerHTML = hour + ":" + minutes + " " + suffix;
-    }
-    // --------------------
-    function updateStartButton() {
-
+      timeText.innerHTML = hour%12 + ":" + minutes + " " + suffix;
     }
   </script>
 </body>
